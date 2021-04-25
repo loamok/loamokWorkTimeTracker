@@ -17,8 +17,8 @@ COMPOSE_PROJECT_NAME=workTimeTracker
 
 ###> symfony/framework-bundle ###
 APP_ENV=dev
-APP_SECRET=75570e67a7da83c03ed50bb4b8479a1d
-JWT_PASSPHRASE=75570e67a7da83c03ed50bb4b8479a1d
+APP_SECRET=thisIsNotSecret
+JWT_PASSPHRASE=thisIsNotSecret
 ###< symfony/framework-bundle ###
 
 ###> symfony/mailer ###
@@ -51,7 +51,7 @@ MYSQL_ROOT_PASSWORD=changeme
 # database for the tuto
 MYSQL_DATABASE=l_wtt
 # user for the tuto
-MYSQL_USER=l_wtt_user
+MYSQL_USER=l_wtt__user
 # user password for the app
 MYSQL_PASSWORD=changeme_l_wtt_passwd
 

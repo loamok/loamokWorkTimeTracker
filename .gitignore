@@ -4,12 +4,15 @@
 /.env.local
 /.env.local.php
 /.env.*.local
+/.env.local.*
+/.env.backup
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
+/src/DataFixtures/users.yaml
+/config/jwt/*.pem
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
@@ -22,5 +25,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
-!/config/jwt/.gitkeep
-/config/jwt/*
+/nbproject
+/vagrant
