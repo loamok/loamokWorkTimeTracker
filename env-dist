@@ -1,0 +1,84 @@
+# In all environments, the following files are loaded if they exist,
+# the latter taking precedence over the former:
+#
+#  * .env                contains default values for the environment variables needed by the app
+#  * .env.local          uncommitted file with local overrides
+#  * .env.$APP_ENV       committed environment-specific defaults
+#  * .env.$APP_ENV.local uncommitted environment-specific overrides
+#
+# Real environment variables win over .env files.
+#
+# DO NOT DEFINE PRODUCTION SECRETS IN THIS FILE NOR IN ANY OTHER COMMITTED FILES.
+#
+# Run "composer dump-env prod" to compile .env files for production use (requires symfony/flex >=1.2).
+# https://symfony.com/doc/current/best_practices.html#use-environment-variables-for-infrastructure-configuration
+
+###> symfony/framework-bundle ###
+APP_ENV=dev
+APP_SECRET=75570e67a7da83c03ed50bb4b8479a1d
+###< symfony/framework-bundle ###
+
+###> symfony/mailer ###
+# MAILER_DSN=smtp://localhost
+###< symfony/mailer ###
+
+###> doctrine/doctrine-bundle ###
+# Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url
+# IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml
+#
+# DATABASE_URL="mysql://l_wtt__user:changeme_l_wtt_passwd@127.0.0.1:8806/l_wtt?serverVersion=mariadb-10.5.0"
+DATABASE_URL="mysql://l_wtt__user:changeme_l_wtt_passwd@database:3306/l_wtt?serverVersion=mariadb-10.5.0"
+###< doctrine/doctrine-bundle ###
+
+###config docker dans compose à ajouter à votre .env###
+###> docker ###
+# Applicable time zone
+TIMEZONE=Europe/Paris
+
+### name of the docker network to use ###
+# Docker network to be created beforehand with the command "docker network create tuto_l_wtt_default" 
+# or whatever network name you want
+DOCKER_NETWORK=tuto_l_wtt_default
+
+###MariaDB ###
+# external access port
+MYSQL_EXT_PORT=8806
+# root password
+MYSQL_ROOT_PASSWORD=changeme
+# database for the tuto
+MYSQL_DATABASE=l_wtt
+# user for the tuto
+MYSQL_USER=l_wtt_user
+# user password for the app
+MYSQL_PASSWORD=changeme_l_wtt_passwd
+
+###Nginx ###
+# external access port for NGINX
+# your instance of l_wtt will be accessible by http://localhost:8800 where 8800 is the configured external port
+NGINX_EXT_PORT=8800
+
+###PhpMyAdmin ###
+# external access port for PhpMyAdmin
+# your instance of PhpMyAdmin for l_wtt will be accessible by http://localhost:8801 where 8801 is the configured external port
+PMA_EXT_PORT=8801
+
+### Proxy conf ###
+# proxy configuration
+# leave commented or empty or delete all of this configuration if you are not using a proxy
+# http proxy defines as: http://plop:tagada@proxy.exemple.com:8080
+PROXY=''
+# https proxy defines as: http://plop:tagada@proxy.exemple.com:8080
+PROXYS=''
+# 'no_proxy' for direct access
+NO_PROXY='localhost,127.*'
+
+###Encore ###
+# external access port for NODE and Encore
+NODE_EXT_PORT=8804
+
+###SQLD ###
+# external access port for wwwsqldesigner
+# your instance of wwwsqldesigner for l_wtt will be accessible by http://localhost:8802 where 8802 is the configured external port
+SQLD_EXT_PORT=8802
+
+###< docker ###
