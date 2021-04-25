@@ -1,3 +1,5 @@
+COMPOSE_PROJECT_NAME=workTimeTracker
+
 # In all environments, the following files are loaded if they exist,
 # the latter taking precedence over the former:
 #
@@ -16,6 +18,7 @@
 ###> symfony/framework-bundle ###
 APP_ENV=dev
 APP_SECRET=75570e67a7da83c03ed50bb4b8479a1d
+JWT_PASSPHRASE=75570e67a7da83c03ed50bb4b8479a1d
 ###< symfony/framework-bundle ###
 
 ###> symfony/mailer ###

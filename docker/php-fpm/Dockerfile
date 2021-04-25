@@ -91,6 +91,6 @@ COPY launch_me_at_boot.sh /var/www/launch_me_at_boot.sh
 RUN test -f /var/www/composer_migrate.sh && chmod +x /var/www/composer_migrate.sh;
 RUN test -f /var/www/launch_me_at_boot.sh && chmod +x /var/www/launch_me_at_boot.sh;
 
-WORKDIR /var/www/sfuxturbo
+WORKDIR /var/www/l_wtt
 
 ENTRYPOINT ["/var/www/launch_me_at_boot.sh"]
