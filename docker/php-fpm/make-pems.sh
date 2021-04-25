@@ -9,7 +9,7 @@ if [ ! -e /var/www/l_wtt/config/jwt/public.pem ]; then
     if [ ! -f public.pem ] ; then echo ${jwt_passphrase} | openssl pkey -in private.pem -passin stdin -out public.pem -pubout; fi;
     setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX /var/www/l_wtt/config/jwt
     setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX /var/www/l_wtt/config/jwt
-    if [ $APPLY_ACL_TO_ROOT eq 1 ] ; then
+    if [ "${APPLY_ACL_TO_ROOT}" == "1" ] ; then
         setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX /var/www/l_wtt/config/jwt
         setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX /var/www/l_wtt/config/jwt
     fi
