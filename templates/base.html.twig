@@ -6,14 +6,30 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
+        {#{% if not is_granted('ROLE_USER') %}
+            <a href="{{ path('app_login') }}">Log in</a>
+        {% endif %}
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, 
+                {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('app_logout') }}" data-turbo-frame="_top">Log out</a>
+                {% endif %}
+            </div>
+        {% endif %}#}
         {% block body %}{% endblock %}
+        <div class="mb-3">
+        <turbo-frame id="personal_badge" src="{{ path('user_badge') }}">
+            User is not logged in now, <a href="{{ path('app_login') }}" data-turbo-frame="_top">Log in</a>
+        </turbo-frame>
+        </div>
     </body>
 </html>

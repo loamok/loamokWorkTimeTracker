@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plop HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    
+    <turbo-frame id="nav_block">
+        <h1>Hello {{ controller_name }} : Plop ! ✅</h1>
+        This friendly message is coming from: HomeController:plop action<br />
+        Go to {% if app.user %}
+            <a href="{{ path('home') }}">Index</a><br />
+            <pre>{{ dump(app.user) }}</pre>
+        {%  else %}    
+            <a href="{{ path('app_login') }}" data-turbo-frame="_top">Login</a><br />
+        {%  endif %} 
+            
+    </turbo-frame>
+</div>
+{% endblock %}

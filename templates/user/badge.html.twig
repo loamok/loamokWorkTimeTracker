@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<turbo-frame id="personal_badge" >
+    {% if not is_granted('ROLE_USER') %}
+        User is not logged in now, <a href="{{ path('app_login') }}" data-turbo-frame="_top">Log in</a>
+    {% else %}
+        Hello, You are logged in as {{ app.user.email }}, <a href="{{ path('app_logout') }}" data-turbo-frame="_top">Log out</a>
+    {% endif %}
+</turbo-frame>
+{% endblock %}
