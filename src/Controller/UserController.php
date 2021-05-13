@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,8 @@ class UserController extends AbstractController {
     /**
      * @Route("/profile/badge", name="user_badge")
      */
-    public function badge(Request $request): Response {
+    public function badge(): Response {
+
         return $this->render('user/badge.html.twig', []);
     }
     

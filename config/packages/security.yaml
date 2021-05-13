@@ -2,16 +2,35 @@ security:
     encoders:
         App\Entity\User:
             algorithm: auto
-
+    
+    access_decision_manager:
+        strategy: unanimous
+        allow_if_all_abstain: false
+    
     providers:
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
+                
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern:  ^/api/login
+            stateless: true
+            json_login:
+                check_path:               /api/login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api/(?!docs)
+            stateless: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         main:
             remember_me:
                 secret:   '%kernel.secret%'
@@ -26,9 +45,25 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
+                invalidate_session: true
+                delete_cookies:
+                    LET_REMEMBERME: { path: null, domain: null}
                 # where to redirect after logout
                 # target: app_any_route
+            json_login:
+                check_path:               /api/login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile/badge$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/api/login_check$,roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/api$,            roles: IS_AUTHENTICATED_REMEMBERED }
+         - { path: ^/api/*,           roles: IS_AUTHENTICATED_REMEMBERED }
+         - { path: ^/logout,          roles: IS_AUTHENTICATED_REMEMBERED }
+         - { path: ^/get_my_token$,   roles: IS_AUTHENTICATED_REMEMBERED }
+         - { path: ^/login,           roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/home,            roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/,                roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/reset-password*, roles: IS_AUTHENTICATED_ANONYMOUSLY }

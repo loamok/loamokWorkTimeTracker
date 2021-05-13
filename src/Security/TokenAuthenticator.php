@@ -20,6 +20,10 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
  */
 class TokenAuthenticator extends AbstractGuardAuthenticator {
     
+    /**
+     * 
+     * @var EntityManagerInterface
+     */
     private $em;
 
     public function __construct(EntityManagerInterface $em) {
@@ -32,7 +36,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator {
      * to be skipped.
      */
     public function supports(Request $request): bool {
-        return $request->headers->has('X-AUTH-TOKEN');
+        return ($request->headers->has('X-AUTH-TOKEN') || $request->headers->has('Authorisation'));
     }
 
     /**
@@ -40,7 +44,17 @@ class TokenAuthenticator extends AbstractGuardAuthenticator {
      * be passed to getUser() as $credentials.
      */
     public function getCredentials(Request $request) {
-        return $request->headers->get('X-AUTH-TOKEN');
+        $res = null;
+        
+        if($request->headers->has('X-AUTH-TOKEN')) {
+            $res = $request->headers->get('X-AUTH-TOKEN');
+        }
+        
+        if($request->headers->has('Authorisation')) {
+            $res = $request->headers->get('Authorisation');
+        }
+        
+        return $res;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface {

@@ -10,9 +10,9 @@
 
 <turbo-frame id="personal_badge" >
     {% if not is_granted('ROLE_USER') %}
-        User is not logged in now, <a href="{{ path('app_login') }}" data-turbo-frame="_top">Log in</a>
+        User is not logged in, go to <a href="{{ path('app_login') }}" data-turbo-frame="_top">Log in</a> to authentify.
     {% else %}
-        Hello, You are logged in as {{ app.user.email }}, <a href="{{ path('app_logout') }}" data-turbo-frame="_top">Log out</a>
+        Hello, You are logged in as {{ app.user.email }}, go to <a href="{{ path('app_logout') }}" data-turbo-frame="_top">Log out</a> to quit.
     {% endif %}
 </turbo-frame>
 {% endblock %}
