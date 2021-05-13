@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -15,13 +15,117 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
+{% set route_name = app.request.attributes.get('_route') %}
+{% set path_attributes = app.request.attributes %}
+{% set home_routes = ['app_homepage', 'app_home'] %}
+{% set worktime_routes = ['worktime_tracker', 'worktime_tracker_create', 'worktime_tracker_display', ] %}
+
     <body>
         <div class="turbo-progress-bar "></div>
-        {% block body %}{% endblock %}
-        <div class="mb-3">
-            <turbo-frame id="personal_badge" src="{{ path('user_badge') }}">
-                User is not logged in, go to <a href="{{ path('app_login') }}" data-turbo-frame="_top">Log in</a> to authentify.
-            </turbo-frame>
+        <header>
+            {% include 'top_bar/_top.html.twig' %}
+            {% block topbar_work %}{% endblock %}
+            {% if route_name is not same as "user_badge" %}
+                {% include 'top_bar/_bottom.html.twig' %}
+            {% endif %}
+        </header>
+        <div class="row">
+            <div class="col-10">
+                <div id="alerts">
+                    <div class="row alerts-danger-zone let-hidden" id="alerts-danger-model">
+                        <div class="col let-hidden" id="alert-danger-zone">
+                            <div class="alert alert-danger alert-dismissible fade let-hidden">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <span class="message">
+                                    {% block alert_danger %}{% endblock %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row alerts-warning-zone let-hidden" id="alerts-warning-model">
+                        <div class="col let-hidden" id="alert-warning-zone">
+                            <div class="alert alert-warning alert-dismissible fade let-hidden">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <span class="message">
+                                    {% block alert_warning %}{% endblock %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row alerts-success-zone let-hidden" id="alerts-success-model">
+                        <div class="col let-hidden" id="alert-success-zone">
+                            <div class="alert alert-success alert-dismissible fade let-hidden">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <span class="message">
+                                    {% block alert_success %}{% endblock %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row alerts-info-zone let-hidden" id="alerts-info-model">
+                        <div class="col let-hidden" id="alert-info-zone">
+                            <div class="alert alert-info alert-dismissible fade let-hidden">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <span class="message">
+                                    {% block alert_info %}{% endblock %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-3" id="tools-icons_spacer"></div>
+            <div class="col-5" id="tools-icons"> {# Icônes de travail #}
+        <button id="btn-calculator-action" type="button" class="wtt display actionsBtn btn btn-outline-danger let-lightgrey">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calculator" viewBox="0 0 16 16">
+                <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"/>
+            </svg>
+            <span class="let-hidden">Prepare</span>
+        </button>
+        <button id="btn-rewind-action" type="button" class="wtt display actionsBtn btn btn-outline-dark disabled let-lightgrey">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-skip-forward-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                <path d="M11.729 5.055a.5.5 0 0 0-.52.038L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.271-.445z"></path>
+            </svg>
+            <span class="let-hidden">First</span>
+        </button>
+        <button id="btn-playpause-action" type="button" class="wtt display actionsBtn btn btn-outline-success let-lightgrey">
+    {#  https://icons.getbootstrap.com/icons/play-circle/  #}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+            </svg>
+            <span id="btn-playpause-action-0" class="let-hidden btn-playpause-action-0 btn-playpause-action-2">Start</span>
+    {#  https://icons.getbootstrap.com/icons/pause-circle/  #}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>
+            </svg>
+            <span id="btn-playpause-action-1" class="let-hidden btn-playpause-action-1">Pause</span>
+        </button>
+        <button id="btn-stop-action" type="button" class="wtt display actionsBtn btn btn-outline-dark let-lightgrey disabled">
+    {#  https://icons.getbootstrap.com/icons/stop-circle/  #}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-stop-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3z"/>
+            </svg>
+            <span class="let-hidden">Stop</span>
+        </button>
+        <button id="btn-end-action" type="button" class="wtt display actionsBtn btn btn-outline-dark let-lightgrey disabled">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-skip-backward-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4.271 5.055a.5.5 0 0 1 .52.038L7.5 7.028V5.5a.5.5 0 0 1 .79-.407L11 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935a.5.5 0 0 1-.79-.407V8.972l-2.71 1.935A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+            </svg>
+    {#  https://icons.getbootstrap.com/icons/skip-backward-circle/  #}
+            <span class="let-hidden">End</span>
+        </button>
+    
+    </div>
+        </div>
+        {% block body %}{% endblock %}
     </body>
 </html>

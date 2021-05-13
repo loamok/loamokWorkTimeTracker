@@ -27,4 +27,12 @@ class UserController extends AbstractController {
         return $this->render('user/badge.html.twig', []);
     }
     
+    /**
+     * @Route("/tools/bar", options = { "expose" = true }, name="tools_bar")
+     */
+    public function toolsBar(): Response {
+
+        return $this->render('user/toolsBar.html.twig', []);
+    }
+    
 }

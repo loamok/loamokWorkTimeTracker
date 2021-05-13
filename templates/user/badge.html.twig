@@ -8,11 +8,23 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<turbo-frame id="personal_badge" >
-    {% if not is_granted('ROLE_USER') %}
-        User is not logged in, go to <a href="{{ path('app_login') }}" data-turbo-frame="_top">Log in</a> to authentify.
-    {% else %}
-        Hello, You are logged in as {{ app.user.email }}, go to <a href="{{ path('app_logout') }}" data-turbo-frame="_top">Log out</a> to quit.
-    {% endif %}
-</turbo-frame>
+    <turbo-frame id="personal_badge" >
+        <ul class="nav">
+        {% if is_granted('ROLE_USER') %}
+            <li class="nav-item">
+                <a data-turbo-frame="_top" href="{{ path('app_logout') }}" class="nav-link {% if route_name == 'app_logout' %}active{% endif %}">Log out</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a data-turbo-frame="_top" href="#" class="nav-link">Register</a>
+            </li>
+            <li class="nav-item">
+                <a data-turbo-frame="_top" href="{{ path('app_login') }}" class="nav-link {% if route_name == 'app_login' %}active{% endif %}">Log in</a>
+            </li>
+            <li class="nav-item">
+                <a data-turbo-frame="_top" href="{{ path('app_forgot_password_request') }}" class="nav-link {% if route_name == 'app_forgot_password_request' %}active{% endif %}">Forgoted my pass</a>
+            </li>
+        {% endif %}
+        </ul>
+    </turbo-frame>
 {% endblock %}
