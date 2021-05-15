@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210425150221 extends AbstractMigration
+final class Version20210514153740 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,19 +20,22 @@ final class Version20210425150221 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE user ('
+        $this->addSql('CREATE TABLE quick_cfg ('
                 . 'id INT AUTO_INCREMENT NOT NULL, '
-                . 'email VARCHAR(180) NOT NULL, '
-                . 'roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', '
-                . 'password VARCHAR(255) NOT NULL, '
-            . 'UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), '
+                . 'langue VARCHAR(2) DEFAULT NULL, '
+                . 'country VARCHAR(2) DEFAULT NULL, '
+                . 'time_zone VARCHAR(50) DEFAULT NULL, '
+                . 'apply_winter_hours TINYINT(1) DEFAULT NULL, '
+                . 'weekly_work_duration VARCHAR(255) DEFAULT NULL, '
+                . 'created_at DATETIME NOT NULL, '
+                . 'updated_at DATETIME NOT NULL, '
             . 'PRIMARY KEY(id)) '
-        . 'DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+            . 'DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE user');
+        $this->addSql('DROP TABLE quick_cfg');
     }
 }

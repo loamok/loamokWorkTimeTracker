@@ -22,8 +22,8 @@ class HomeController extends AbstractController {
     }
     
     /** 
-     * @Route("/api/plop", name="api_plop")
-     * @Route("/plop", name="app_plop")
+     * @Route("/api/plop_old", name="api_plop")
+     * @Route("/plop_old", name="app_plop")
      * @IsGranted("ROLE_USER")
      */
     public function plop(): Response {

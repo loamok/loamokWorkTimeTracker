@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QuickCfg{% endblock %}
+
+{% block body %}
+    <turbo-frame id="quickCfg_crud">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-5">
+                <h1>QuickCfg</h1>
+
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Id</th>
+                            <td>{{ quick_cfg.id }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Langue</th>
+                            <td>{{ quick_cfg.langue }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Country</th>
+                            <td>{{ quick_cfg.country }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">TimeZone</th>
+                            <td>{{ quick_cfg.timeZone }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ApplyWinterHours</th>
+                            <td>{{ quick_cfg.applyWinterHours ? 'Yes' : 'No' }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">WeeklyWorkDuration</th>
+                            <td>{{ quick_cfg.weeklyWorkDuration }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CreatedAt</th>
+                            <td>{{ quick_cfg.createdAt ? quick_cfg.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">UpdatedAt</th>
+                            <td>{{ quick_cfg.updatedAt ? quick_cfg.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a href="{{ path('quick_cfg_index') }}">back to list</a>
+
+                <a href="{{ path('quick_cfg_edit', {'id': quick_cfg.id}) }}" data-turbo-frame="_top">edit</a>
+
+                {{ include('quick_cfg/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </turbo-frame>
+{% endblock %}

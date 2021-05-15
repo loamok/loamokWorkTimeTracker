@@ -1,0 +1,4 @@
+{{ form_start(form, { "data-turbo-frame": "_top"}) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-outline-success let-lightgrey">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

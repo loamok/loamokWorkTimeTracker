@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QuickCfg index{% endblock %}
+
+{% block body %}
+    <turbo-frame id="quickCfg_crud">
+        <h1>QuickCfg list</h1>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Langue</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">TimeZone</th>
+                    <th scope="col">ApplyWinterHours</th>
+                    <th scope="col">WeeklyWorkDuration</th>
+                    <th scope="col">CreatedAt</th>
+                    <th scope="col">UpdatedAt</th>
+                    <th scope="col">actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for quick_cfg in quick_cfgs %}
+                <tr>
+                    <td>{{ quick_cfg.id }}</td>
+                    <td>{{ quick_cfg.langue }}</td>
+                    <td>{{ quick_cfg.country }}</td>
+                    <td>{{ quick_cfg.timeZone }}</td>
+                    <td>{{ quick_cfg.applyWinterHours ? 'Yes' : 'No' }}</td>
+                    <td>{{ quick_cfg.weeklyWorkDuration }}</td>
+                    <td>{{ quick_cfg.createdAt ? quick_cfg.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ quick_cfg.updatedAt ? quick_cfg.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('quick_cfg_show', {'id': quick_cfg.id}) }}" data-turbo-frame="_top">show</a>
+                        <a href="{{ path('quick_cfg_edit', {'id': quick_cfg.id}) }}" data-turbo-frame="_top">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('quick_cfg_new') }}" data-turbo-frame="_top">Create new</a>
+    </turbo-frame>
+{% endblock %}

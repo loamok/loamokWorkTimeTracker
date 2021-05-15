@@ -17,7 +17,8 @@
             <a href="{{ path('app_plop') }}">Plop</a><br />
         {%  else %}    
             <a href="{{ path('app_login') }}" data-turbo-frame="_top">Login</a><br />
-        {%  endif %}    
+        {%  endif %}    <br />
+            <a href="{{ path('quick_cfg_index') }}" data-turbo-frame="_top">QuickConfig</a><br />
     </turbo-frame>
 </div>
 {% endblock %}

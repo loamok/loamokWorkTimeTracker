@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New QuickCfg{% endblock %}
+
+{% block body %}
+    <turbo-frame id="quickCfg_crud">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-5">
+                <h1>Create QuickCfg</h1>
+
+                {{ include('quick_cfg/_form.html.twig') }}
+
+                <a href="{{ path('quick_cfg_index') }}">back to list</a>
+            </div>
+        </div>
+    </turbo-frame>
+{% endblock %}
