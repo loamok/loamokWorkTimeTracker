@@ -54,6 +54,14 @@ security:
                 check_path:               /api/login_check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+    role_hierarchy:
+        # meta roles thoses are roles used for permissions
+        ROLE_USER:  ~                                       # base role for all users
+        ROLE_GRANTER: ~                                     # meta role for person allowed to administer users
+        # real roles (affected user roles) thoses are roles to affect meta roles of permissions
+        # do not affect @granted on real roles but on meta roles only
+        ROLE_CONSUMER:  [ROLE_USER]                         # user of the application
+        ROLE_ADMIN:     [ROLE_USER, ROLE_GRANTER]           # application administrator
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile/badge$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -63,6 +71,8 @@ security:
          - { path: ^/api/*,           roles: IS_AUTHENTICATED_REMEMBERED }
          - { path: ^/logout,          roles: IS_AUTHENTICATED_REMEMBERED }
          - { path: ^/get_my_token$,   roles: IS_AUTHENTICATED_REMEMBERED }
+         - { path: ^/admin/*,         roles: [ROLE_ADMIN] }
+         - { path: ^/admin/user*,     roles: [ROLE_ADMIN, ROLE_GRANTER] }
          - { path: ^/login,           roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/home,            roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/,                roles: IS_AUTHENTICATED_ANONYMOUSLY }

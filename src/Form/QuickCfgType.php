@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\QuickCfg;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -30,15 +31,11 @@ class QuickCfgType extends AbstractType {
                 'label' => "Respecter l'heure d'hiver : ",
                 'required' => false,
             ])
-            ->add('weeklyWorkDuration', ChoiceType::class, [
-                'label' => "Rythme de travail : ",
-                'choices' => [
-                    "37h/11Jrtt(L-J 8-12/13-17,V 8-12/13-16:30)" => "37h/11Jrtt(L-J 8-12/13-17,V 8-12/13-16:30)",
-                    "39h/28Jrtt(L-J 7:30-12/13-17:30,V 7:30-12/13-16:30)" => "39h/28Jrtt(L-J 7:30-12/13-17:30,V 7:30-12/13-16:30)",
-                    "35h/0Jrtt(L-V 8-12/13-16)" => "35h/0Jrtt(L-V 8-12/13-16)",
-                ],
-                'required' => true,
-            ])
+//            ->add('weeklyWorkDuration', EntityType::class, [
+//                'label' => "Rythme de travail : ",
+//                
+//                'required' => true,
+//            ])
         ;
     }
 

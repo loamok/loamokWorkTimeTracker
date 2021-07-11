@@ -42,10 +42,11 @@ class QuickCfg {
     private $applyWinterHours;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity=WorkDuration::class, inversedBy="quickCfgs")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $weeklyWorkDuration;
-    
+    private $workDuration;
+
     public function getId(): ?int {
         return $this->id;
     }
@@ -106,6 +107,16 @@ class QuickCfg {
 
     public function setWeeklyWorkDuration(?string $weeklyWorkDuration): self {
         $this->weeklyWorkDuration = $weeklyWorkDuration;
+
+        return $this;
+    }
+
+    public function getWorkDuration(): ?WorkDuration {
+        return $this->workDuration;
+    }
+
+    public function setWorkDuration(?WorkDuration $workDuration): self {
+        $this->workDuration = $workDuration;
 
         return $this;
     }

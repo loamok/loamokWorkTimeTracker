@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @Route("/quick/cfg")
@@ -21,6 +22,14 @@ class QuickCfgController extends AbstractController {
      * @Route("/", name="quick_cfg_index", methods={"GET"})
      */
     public function index(QuickCfgRepository $quickCfgRepository): Response {
+        $session = new Session();
+        
+//        $session->getFlashBag()->add('warning', 'this test warning');
+//        $session->getFlashBag()->add('info', 'just a test of info');
+//        $session->getFlashBag()->add('error', 'test of error');
+//        $session->getFlashBag()->add('error', 'Another error');
+//        $session->getFlashBag()->add('success', 'Test of success');
+        
         return $this->render('quick_cfg/index.html.twig', [
             'quick_cfgs' => $quickCfgRepository->findAll(),
         ]);

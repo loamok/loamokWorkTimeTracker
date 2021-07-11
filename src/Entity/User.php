@@ -11,6 +11,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface {
     
+    // Users Roles
+    // inverted array for forms
+    const ROLES_IDX = [
+        'User' => "ROLE_CONSUMER",
+        'Admin' => "ROLE_ADMIN"
+    ];
+    // standard arrays for make it human readable (for views)
+    const ROLES_LOGIC = [
+        "ROLE_CONSUMER" => 'User',
+        "ROLE_ADMIN" => 'Admin'
+    ];
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

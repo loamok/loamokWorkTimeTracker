@@ -1,0 +1,74 @@
+{# empty Twig template #}
+{% set flashes = app.flashes %}
+<div class="col-10">
+    <div id="alerts">
+        <div class="row alerts-danger-zone {{ flashes.error is defined ? "" :  "let-hidden" }}" id="alerts-danger-model">
+            <div class="col {{ flashes.error is defined ? "" :  "let-hidden" }}" id="alert-danger-zone">
+                <div class="alert alert-danger alert-dismissible {{ flashes.error is defined ? "" :  "let-hidden" }}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span class="message">
+                        {% block alert_danger %}{% endblock %}
+                    </span>
+                    {% if flashes.error is defined and flashes.error|length > 0 %} 
+                        <br />
+                        {% for message in flashes.error %}
+                            <span class="message">{{ message }}</span>
+                            {{ loop.last ? "" : "<br />"|raw }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row alerts-warning-zone {{ flashes.warning is defined ? "" :  "let-hidden" }}" id="alerts-warning-model">
+            <div class="col {{ flashes.warning is defined ? "" :  "let-hidden" }}" id="alert-warning-zone">
+                <div class="alert alert-warning alert-dismissible {{ flashes.warning is defined ? "" :  "let-hidden" }}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span class="message">
+                        {% block alert_warning %}{% endblock %}
+                    </span>
+                    {% if flashes.warning is defined and flashes.warning|length > 0 %} 
+                        <br />
+                        {% for message in flashes.warning %}
+                            <span class="message">{{ message }}</span>
+                            {{ loop.last ? "" : "<br />"|raw }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row alerts-success-zone {{ flashes.success is defined ? "" :  "let-hidden" }}" id="alerts-success-model">
+            <div class="col {{ flashes.success is defined ? "" :  "let-hidden" }}" id="alert-success-zone">
+                <div class="alert alert-success alert-dismissible {{ flashes.success is defined ? "" :  "let-hidden" }}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span class="message">
+                        {% block alert_success %}{% endblock %}
+                    </span>
+                    {% if flashes.success is defined and flashes.success |length > 0 %} 
+                        <br />
+                        {% for message in flashes.success %}
+                            <span class="message">{{ message }}</span>
+                            {{ loop.last ? "" : "<br />"|raw }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row alerts-info-zone {{ flashes.info is defined ? "" :  "let-hidden" }}" id="alerts-info-model">
+            <div class="col {{ flashes.info is defined ? "" :  "let-hidden" }}" id="alert-info-zone">
+                <div class="alert alert-info alert-dismissible {{ flashes.info is defined ? "" :  "let-hidden" }}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span class="message">
+                        {% block alert_info %}{% endblock %}
+                    </span>
+                    {% if flashes.info is defined and flashes.info|length > 0 %} 
+                        <br />
+                        {% for message in flashes.info %}
+                            <span class="message">{{ message }}</span>
+                            {{ loop.last ? "" : "<br />"|raw }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

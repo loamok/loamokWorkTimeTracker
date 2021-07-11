@@ -1,0 +1,7 @@
+{% set appRoles = constant('App\\Entity\\User::ROLES_LOGIC') %}
+{% for r in user.roles %}
+    {# Display only the real role of the user (not the ROLE_USER) and human readable not ROLE_XXXX #}
+    {% if appRoles[r] is defined %}
+        {{ appRoles[r] }}
+    {% endif %}
+{% endfor %}
