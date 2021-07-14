@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block menu_links %}
+    {% include "quick_cfg/_menu.html.twig" %}
+{% endblock %}
+
+{% block title %}New WorkingDurationStore{% endblock %}
+
+{% block body %}
+    <h1>Create new WorkingDurationStore</h1>
+
+    {{ include('working_duration_store/_form.html.twig') }}
+
+    <a href="{{ path('working_duration_store_index') }}">back to list</a>
+{% endblock %}

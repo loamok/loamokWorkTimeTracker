@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block menu_links %}
+    {% include "quick_cfg/_menu.html.twig" %}
+{% endblock %}
+
+{% block title %}DailyWorkDuration index{% endblock %}
+
+{% block body %}
+    <h1>DailyWorkDuration index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DayLong</th>
+                <th>DayShort</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for daily_work_duration in daily_work_durations %}
+            <tr>
+                <td>{{ daily_work_duration.id }}</td>
+                <td>{{ daily_work_duration.dayLong }}</td>
+                <td>{{ daily_work_duration.dayShort }}</td>
+                <td>
+                    <a href="{{ path('daily_work_duration_show', {'id': daily_work_duration.id}) }}">show</a>
+                    <a href="{{ path('daily_work_duration_edit', {'id': daily_work_duration.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('daily_work_duration_new') }}">Create new</a>
+{% endblock %}

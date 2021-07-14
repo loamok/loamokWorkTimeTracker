@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block menu_links %}
+    {% include "quick_cfg/_menu.html.twig" %}
+{% endblock %}
+
+{% block title %}Edit DailyWorkDuration{% endblock %}
+
+{% block body %}
+    <h1>Edit DailyWorkDuration</h1>
+
+    {{ include('daily_work_duration/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('daily_work_duration_index') }}">back to list</a>
+
+    {{ include('daily_work_duration/_delete_form.html.twig') }}
+{% endblock %}

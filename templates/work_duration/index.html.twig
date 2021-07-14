@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block menu_links %}
+    {% include "quick_cfg/_menu.html.twig" %}
+{% endblock %}
+
+{% block title %}WorkDuration index{% endblock %}
+
+{% block body %}
+    <h1>WorkDuration index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for work_duration in work_durations %}
+            <tr>
+                <td>{{ work_duration.id }}</td>
+                <td>{{ work_duration.name }}</td>
+                <td>{{ work_duration.description }}</td>
+                <td>
+                    <a href="{{ path('work_duration_show', {'id': work_duration.id}) }}">show</a>
+                    <a href="{{ path('work_duration_edit', {'id': work_duration.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('work_duration_new') }}">Create new</a>
+{% endblock %}

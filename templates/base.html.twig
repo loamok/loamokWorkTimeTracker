@@ -30,6 +30,23 @@
                 {% include 'top_bar/_bottom.html.twig' %}
             {% endif %}
         </header>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-light bg-light-blue mb-3">
+                <div class="container-fluid">
+                    <a href="#" class="navbar-brand mr-3">Menu : </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav">
+                            <ul class="nav">
+                                {% block menu_links %}{% endblock %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
         <div class="container-fluid">
             <div class="row">
                 {% include '_alerts_zone.html.twig' %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block menu_links %}
+    {% include "quick_cfg/_menu.html.twig" %}
+{% endblock %}
+
+{% block title %}New WorkDuration{% endblock %}
+
+{% block body %}
+    <h1>Create new WorkDuration</h1>
+
+    {{ include('work_duration/_form.html.twig') }}
+
+    <a href="{{ path('work_duration_index') }}">back to list</a>
+{% endblock %}

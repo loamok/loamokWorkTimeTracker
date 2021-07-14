@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block menu_links %}
+    {% include "quick_cfg/_menu.html.twig" %}
+{% endblock %}
+
+{% block title %}WorkingDurationStore index{% endblock %}
+
+{% block body %}
+    <h1>WorkingDurationStore index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for working_duration_store in working_duration_stores %}
+            <tr>
+                <td>{{ working_duration_store.id }}</td>
+                <td>{{ working_duration_store.start ? working_duration_store.start|date('H:i:s') : '' }}</td>
+                <td>{{ working_duration_store.end ? working_duration_store.end|date('H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('working_duration_store_show', {'id': working_duration_store.id}) }}">show</a>
+                    <a href="{{ path('working_duration_store_edit', {'id': working_duration_store.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('working_duration_store_new') }}">Create new</a>
+{% endblock %}
